@@ -81,12 +81,12 @@ void leerMallayCondiciones(mesh &m,char *filename){
     addExtension(inputfilename,filename,".dat");
     file.open(inputfilename);
 
-    file >> const_t >> const_k >>  lambda >>   delta >>  const_n >>   v_bar >>   psi_in_x >>   psi_in_y;
+    file >> const_t >> const_k >>  lambda >>   delta >>  const_n >>   psi_in_x >>   psi_in_y;
     //cout <<u_bar<<nu<<rho<<f_x<<f_y<<"\n";
     file >> nnodes >> neltos >> ndirich_u >> ndirich_v >>ndirich_p;
     //cout <<nnodes<<neltos<<ndirich_u<<ndirich_v<<ndirich_p<<"\n";
 
-    m.setParameters( const_t, const_k, lambda,  delta,  const_n,  v_bar,  psi_in_x,  psi_in_y);
+    m.setParameters( const_t, const_k, lambda,  delta,  const_n, psi_in_x,  psi_in_y);
     m.setSizes(nnodes,neltos,ndirich_u+ndirich_v+ndirich_p);
     m.createData();
 

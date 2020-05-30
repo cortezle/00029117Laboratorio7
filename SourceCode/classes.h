@@ -109,7 +109,7 @@ class condition: public item{
 };
 
 class mesh{
-        float parameters[8];
+        float parameters[9];
         int sizes[6];
         node *node_list;
         element *element_list;
@@ -117,14 +117,12 @@ class mesh{
         condition *dirichlet_list;
         //condition *neumann_list;
     public:
-        void setParameters(float const_t,float const_k,float lambda, float delta, float const_n, float v_bar, float psi_in_x, float psi_in_y){
-            //CONST_T,CONST_K,LAMBDA,DELTA,CONST_N,V_BAR,PSI_IN_X,PSI_IN_Y};
+        void setParameters(float const_t,float const_k,float lambda, float delta, float const_n, float psi_in_x, float psi_in_y){
             parameters[CONST_T]=const_t;
             parameters[CONST_K]=const_k;
             parameters[LAMBDA]=lambda;
             parameters[DELTA]=delta;
             parameters[CONST_N]=const_n;
-            parameters[V_BAR]=v_bar;
             parameters[PSI_IN_X]=psi_in_x;
             parameters[PSI_IN_Y]=psi_in_y;
         }
