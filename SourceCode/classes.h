@@ -1,6 +1,6 @@
 enum lines {NOLINE,SINGLELINE,DOUBLELINE};
 enum modes {NOMODE,INT_FLOAT,INT_FLOAT_FLOAT,INT_INT_INT_INT};
-enum parameters {CONST_T,CONST_K,LAMBDA,DELTA,CONST_N,V_BAR,PSI_IN_X,PSI_IN_Y};
+enum parameters {CONST_T,CONST_K,LAMBDA,DELTA,CONST_N,PSI_IN_X,PSI_IN_Y};
 enum sizes {NODES,ELEMENTS,DIRICHLET};
 enum coords {EQUIS,YE};
 
@@ -109,7 +109,7 @@ class condition: public item{
 };
 
 class mesh{
-        float parameters[9];
+        float parameters[7];
         int sizes[6];
         node *node_list;
         element *element_list;

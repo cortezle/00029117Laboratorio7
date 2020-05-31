@@ -146,7 +146,7 @@ Matrix createLocalK(int e,mesh &m){
     calculateGammaMatrix(g_matrix);
     calculateLocalA(e,Alpha,m);
     calculateBetaMatrix(Beta);
-    productRealMatrix(const_t/(4*D),productMatrixMatrix(g_matrix,productMatrixMatrix(Alpha,Beta,2,2,6),6,2,6),matrixB);
+    productRealMatrix(const_t*J/(24*D),productMatrixMatrix(g_matrix,productMatrixMatrix(Alpha,Beta,2,2,6),6,2,6),matrixB);
 
     //Preparando matrixK (En clase conocida simplemente como K)
     const_k=m.getParameter(CONST_K);
@@ -155,10 +155,7 @@ Matrix createLocalK(int e,mesh &m){
     transpose(Beta,Betat);
     productRealMatrix(const_k*Ae/(D*D),productMatrixMatrix(Betat,productMatrixMatrix(Alphat,productMatrixMatrix(Alpha,Beta,2,2,6),2,2,6),6,2,6),matrixK);
 
-    //Preparando matrixG (En clase conocida simplemente como G)
-    transpose(BPrima,BPrimat);
-    transpose(g_matrix,g_matrix_t);
-    productRealMatrix(J/(6*D),productMatrixMatrix(BPrimat,productMatrixMatrix(Alphat,g_matrix_t,2,2,6),3,2,6),matrixG);
+    
 
     //Preparando matrixL
     delta = m.getParameter(DELTA);
@@ -168,8 +165,13 @@ Matrix createLocalK(int e,mesh &m){
     //Preparando matrixE
     lambda = m.getParameter(LAMBDA);
     calculateBPrima(BPrima);
-    productRealMatrix(2*lambda/(18*D),productMatrixMatrix(g_matrix,productMatrixMatrix(Alpha,BPrima,2,2,3),6,2,3),matrixE);
+    productRealMatrix(lambda*J/9*D,productMatrixMatrix(g_matrix,productMatrixMatrix(Alpha,BPrima,2,2,3),6,2,3),matrixE);
     
+    //Preparando matrixG (En clase conocida simplemente como G)
+    transpose(BPrima,BPrimat);
+    transpose(g_matrix,g_matrix_t);
+    productRealMatrix(J/(6*D),productMatrixMatrix(BPrimat,productMatrixMatrix(Alphat,g_matrix_t,2,2,6),3,2,6),matrixG);
+
     //Colocando submatrices en K
     zeroes(K,9);
     ubicarSubMatriz(K,0,5,0,5,sumMatrix(matrixB,matrixK,6,6));
